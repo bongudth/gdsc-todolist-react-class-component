@@ -1,12 +1,19 @@
+import React from 'react';
 import './App.scss';
+import TodoItem from './components/TodoItem';
 
-function App() {
-  return (
-    <div>
-      <h1>Todolist</h1>
-      <p>made by bongu</p>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <div className="container">
+        <h1>Todolist</h1>
+        <span className="subtitle">made by <a href="https://github.com/bongudth">bongudth</a></span>
+        <div className="todo-list">
+          <TodoItem />
+        </div>
+      </div>
+    )
+  }
 }
 
 export default App;

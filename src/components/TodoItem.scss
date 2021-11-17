@@ -1,0 +1,33 @@
+@import "../assets/variable.scss";
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  width: 500px;
+  border-radius: $border-radius;
+  border: 1px solid transparent;
+  border-bottom: 1px solid $border-color;
+  padding: 5px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: $background-color;
+  }
+
+  &:last-child {
+    border-bottom: 1px solid transparent;
+  }
+
+  i {
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: $title-color;
+    }
+
+    &:last-child {
+      margin-left: 10px;
+    }
+  }
+}
