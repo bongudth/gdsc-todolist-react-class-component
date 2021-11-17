@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.scss';
-import TodoItem from './components/TodoItem';
+import TodoItem from './components/TodoItem/TodoItem';
+import TodoButton from './components/TodoButton/TodoButton'
 
 class App extends React.Component {
   render() {
@@ -10,7 +11,11 @@ class App extends React.Component {
         <span className="subtitle">made by <a href="https://github.com/bongudth">bongudth</a></span>
         <div className="todo-list">
           <TodoItem />
+          <TodoItem />
+          <TodoItem />
+          <TodoItem />
         </div>
+        <TodoButton />
       </div>
     )
   }

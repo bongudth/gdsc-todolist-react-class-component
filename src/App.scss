@@ -21,4 +21,13 @@
       text-decoration: underline;
     }
   }
+
+  .todo-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: $box-shadow;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
 }
