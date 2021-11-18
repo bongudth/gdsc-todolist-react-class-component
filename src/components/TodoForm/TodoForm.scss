@@ -1,0 +1,43 @@
+@import "../../assets/variable.scss";
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+
+  .todo-input {
+    width: 100%;
+    font-family: 'Comfortaa', cursive;
+    border-radius: $border-radius;
+    border: 1px solid transparent;
+    border-bottom: 1px solid $border-color;
+    padding: 5px;
+    margin-bottom: 20px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .todo-submit {
+    background-color: transparent;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    padding: 5px;
+    box-shadow: $box-shadow;
+    cursor: pointer;
+
+    &:hover {
+      background-color: $background-color;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    &:active {
+      box-shadow: none;
+    }
+  }
+}
