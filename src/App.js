@@ -9,7 +9,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showForm: false
+      showForm: false,
+      todoItems: [
+        { id: 1, action: 'Learn React', done: true },
+        { id: 2, action: 'Learn Vue', done: false },
+        { id: 3, action: 'Learn Angular', done: false }
+      ]
     }
   }
 
@@ -25,13 +30,22 @@ class App extends React.Component {
     })
   }
 
+  handleAddTodo = (todo) => {
+    this.setState({
+      showForm: false,
+      todoItems: [...this.state.todoItems, { id: this.state.todoItems.length + 1, action: todo, done: false }]
+    })
+  }
+
   render() {
     return (
       <div className="container">
         <h1>Todolist</h1>
-        <span className="subtitle">made by <a href="https://github.com/bongudth">bongudth</a></span>
+        <span className="subtitle">made by <a href="https://github.com/bongudth" target="_blank" rel="noopener noreferrer">bongudth</a></span>
         <div className="todo-list">
-          <TodoItem />
+          {this.state.todoItems.map(item => (
+            <TodoItem key={item.id} action={item.action} done={item.done} />
+          ))}
         </div>
         <div onClick={this.handleShowButton}><TodoButton /></div>
         <Modal
@@ -41,7 +55,7 @@ class App extends React.Component {
           centered
         >
           <Modal.Body>
-            <TodoForm />
+            <TodoForm handleAddTodo={this.handleAddTodo} />
           </Modal.Body>
         </Modal>
       </div>

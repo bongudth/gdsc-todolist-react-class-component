@@ -2,13 +2,33 @@ import React from 'react';
 import "./TodoForm.scss";
 
 class TodoForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newTodo: ""
+    }
+  }
+
+  handleChangeState = (e) => {
+    this.setState({
+      newTodo: e.target.value
+    });
+  }
+
+  handleNewTodo = () => {
+    this.state.newTodo ? this.props.handleAddTodo(this.state.newTodo) : alert("Plizz write a new todo!");
+    this.setState({
+      newTodo: ""
+    })
+  }
+
   render() {
     return (
-      <form className="todo-form">
+      <div className="todo-form">
         <h2>New todo</h2>
-        <input className="todo-input"></input>
-        <button className="todo-submit">Submit</button>
-      </form>
+        <input className="todo-input" value={this.props.newTodo} onChange={this.handleChangeState}></input>
+        <button className="todo-submit" onClick={this.handleNewTodo}>Submit</button>
+      </div>
     )
   }
 }

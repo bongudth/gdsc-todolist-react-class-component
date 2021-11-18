@@ -4,11 +4,11 @@ import "./TodoItem.scss";
 class TodoItem extends React.Component {
   render() {
     return (
-      <div className="todo-item">
-        <div>Love you all</div>
+      <div className={this.props.done ? "todo-item done" : "todo-item"}>
+        <div>{this.props.action}</div>
         <div>
-          <i className="fas fa-pencil-alt"></i>
-          <i className="fas fa-eraser"></i>
+          <i className="far fa-edit"></i>
+          <i className="far fa-trash-alt"></i>
         </div>
       </div>
     )
