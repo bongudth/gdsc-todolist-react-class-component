@@ -2,18 +2,21 @@ import React from 'react';
 import { Modal } from 'react-bootstrap';
 import './App.scss';
 import TodoItem from './components/TodoItem/TodoItem';
-import TodoButton from './components/TodoButton/TodoButton'
-import TodoForm from './components/TodoForm/TodoForm'
+import TodoButton from './components/TodoButton/TodoButton';
+import TodoForm from './components/TodoForm/TodoForm';
+import TodoEdit from './components/TodoEdit/TodoEdit';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showForm: false,
+      showEdit: false,
+      todoEdit: "",
       todoItems: [
-        { action: 'Learn React', done: true },
-        { action: 'Learn Vue', done: false },
-        { action: 'Learn Angular', done: false }
+        { id: 1, action: 'Learn React', done: true },
+        { id: 2, action: 'Learn Vue', done: false },
+        { id: 3, action: 'Learn Angular', done: false }
       ]
     }
   }
@@ -30,10 +33,22 @@ class App extends React.Component {
     })
   }
 
+  handleShowEdit = () => {
+    this.setState({
+      showEdit: true
+    })
+  }
+
+  handleHideEdit = () => {
+    this.setState({
+      showEdit: false
+    })
+  }
+
   handleAddTodo = (todo) => {
     this.setState({
       showForm: false,
-      todoItems: [...this.state.todoItems, { action: todo, done: false }]
+      todoItems: [...this.state.todoItems, { id: this.state.todoItems.length + 1, action: todo, done: false }]
     })
   }
 
@@ -48,6 +63,25 @@ class App extends React.Component {
     })
   }
 
+  handleClickEdit = (todo) => {
+    this.setState({
+      showEdit: true,
+      todoEdit: todo
+    })
+  }
+
+  handleEditTodo = (todo) => {
+    this.setState({
+      showEdit: false,
+      todoItems: this.state.todoItems.map(item => {
+        if (item.action === this.state.todoEdit) {
+          item.action = todo;
+        }
+        return item;
+      })
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -56,10 +90,11 @@ class App extends React.Component {
         <div className="todo-list">
           {this.state.todoItems.map(item => (
             <TodoItem
-              key={item.action}
+              key={item.id}
               action={item.action}
               done={item.done}
               handleToggleDone={this.handleToggleDone}
+              handleClickEdit={this.handleClickEdit}
             />
           ))}
         </div>
@@ -72,6 +107,16 @@ class App extends React.Component {
         >
           <Modal.Body>
             <TodoForm handleAddTodo={this.handleAddTodo} />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          show={this.state.showEdit}
+          onHide={this.handleHideEdit}
+          size="md"
+          centered
+        >
+          <Modal.Body>
+            <TodoEdit todoEdit={this.state.todoEdit} handleEditTodo={this.handleEditTodo} />
           </Modal.Body>
         </Modal>
       </div>
