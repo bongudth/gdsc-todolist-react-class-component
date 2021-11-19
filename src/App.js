@@ -5,6 +5,7 @@ import TodoItem from './components/TodoItem/TodoItem';
 import TodoButton from './components/TodoButton/TodoButton';
 import TodoForm from './components/TodoForm/TodoForm';
 import TodoEdit from './components/TodoEdit/TodoEdit';
+import TodoDelete from './components/TodoDelete/TodoDelete';
 
 class App extends React.Component {
   constructor(props) {
@@ -12,7 +13,9 @@ class App extends React.Component {
     this.state = {
       showForm: false,
       showEdit: false,
+      showDelete: false,
       todoEdit: "",
+      todoDelete: "",
       todoItems: [
         { id: 1, action: 'Learn React', done: true },
         { id: 2, action: 'Learn Vue', done: false },
@@ -42,6 +45,18 @@ class App extends React.Component {
   handleHideEdit = () => {
     this.setState({
       showEdit: false
+    })
+  }
+
+  handleShowDelete = () => {
+    this.setState({
+      showDelete: true
+    })
+  }
+
+  handleHideDelete = () => {
+    this.setState({
+      showDelete: false
     })
   }
 
@@ -82,6 +97,20 @@ class App extends React.Component {
     })
   }
 
+  handleClickDelete = (todo) => {
+    this.setState({
+      showDelete: true,
+      todoDelete: todo
+    })
+  }
+
+  handleDeleteTodo = (todo) => {
+    this.setState({
+      showDelete: false,
+      todoItems: this.state.todoItems.filter(item => item.action !== todo)
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -95,6 +124,7 @@ class App extends React.Component {
               done={item.done}
               handleToggleDone={this.handleToggleDone}
               handleClickEdit={this.handleClickEdit}
+              handleClickDelete={this.handleClickDelete}
             />
           ))}
         </div>
@@ -117,6 +147,16 @@ class App extends React.Component {
         >
           <Modal.Body>
             <TodoEdit todoEdit={this.state.todoEdit} handleEditTodo={this.handleEditTodo} />
+          </Modal.Body>
+        </Modal>
+        <Modal
+          show={this.state.showDelete}
+          onHide={this.handleHideDelete}
+          size="md"
+          centered
+        >
+          <Modal.Body>
+            <TodoDelete todoDelete={this.state.todoDelete} handleDeleteTodo={this.handleDeleteTodo} />
           </Modal.Body>
         </Modal>
       </div>

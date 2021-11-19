@@ -17,6 +17,10 @@ class TodoItem extends React.Component {
     this.props.handleClickEdit(this.props.action);
   }
 
+  handleClickDelete = () => {
+    this.props.handleClickDelete(this.props.action);
+  }
+
   render() {
     return (
       <div className={this.props.done ? "todo-item done" : "todo-item"}>
@@ -30,7 +34,7 @@ class TodoItem extends React.Component {
             }
           </div>
           <i onClick={this.handleClickEdit} className="far fa-edit"></i>
-          <i className="far fa-trash-alt"></i>
+          <i onClick={this.handleClickDelete} className="far fa-trash-alt"></i>
         </div>
       </div>
     )
